@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  <title>Benutzerverwaltung</title>
+
+  <!-- Nur diese CSS -->
+  <link rel="stylesheet" href="../assets/css/admin.css" />
+
+  <script src="../assets/js/auth-guard.js" defer></script>
+  <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛠️</text></svg>">
+</head>
+
+<body class="admin-page">
+  <header class="topbar">
+    <a href="index.html" class="link" title="Zurück">&larr; Zurück</a>
+    <h1 class="brand">Benutzerverwaltung</h1>
+    <nav class="iconbar" aria-label="Aktionen">
+      <button id="themeToggle" class="icon-btn" title="Theme umschalten" aria-label="Theme umschalten">
+        <span class="icon-emoji">🌗</span>
+      </button>
+      <button id="logoutBtn" class="icon-btn" title="Abmelden" aria-label="Abmelden">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+             stroke="currentColor" fill="none" stroke-width="1.5" aria-hidden="true">
+          <path d="M9 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2"/>
+          <path d="M16 17l5-5-5-5"/>
+          <path d="M21 12H9"/>
+        </svg>
+      </button>
+    </nav>
+  </header>
+
+  <div class="logo-wrap">
+    <img src="../assets/img/dhbw_logo.svg" alt="DHBW Logo" class="logo">
+  </div>
+
+  <main class="content">
+    <!-- Guard-Info -->
+    <section class="card" id="guardInfo" hidden>
+      <p><strong>Nur Administratoren haben Zugriff. Weiterleitung …</strong></p>
+    </section>
+
+    <!-- Benutzer anlegen -->
+    <section class="card">
+      <h2 class="h2">Benutzer anlegen</h2>
+      <form id="formCreate" class="grid">
+        <label class="field">
+          <span>E-Mail</span>
+          <input id="createEmail" class="input" type="email" required placeholder="user@heilbronn.dhbw.de">
+        </label>
+        <label class="field">
+          <span>Rolle</span>
+          <select id="createRole" class="input">
+            <option value="user">user</option>
+            <option value="lecture">lecture</option>
+            <option value="admin">admin</option>
+          </select>
+        </label>
+        <button class="btn" type="submit">Anlegen</button>
+        <output id="outCreate" class="muted"></output>
+      </form>
+    </section>
+
+    <!-- Benutzer löschen -->
+    <section class="card">
+      <h2 class="h2">Benutzer löschen</h2>
+      <form id="formDelete" class="grid">
+        <label class="field">
+          <span>E-Mail</span>
+          <input id="deleteEmail" class="input" type="email" required placeholder="user@heilbronn.dhbw.de">
+        </label>
+        <button class="btn" type="submit">Löschen</button>
+        <output id="outDelete" class="muted"></output>
+      </form>
+    </section>
+
+    <!-- Benutzer suchen -->
+    <section class="card">
+      <h2 class="h2">Benutzer suchen</h2>
+      <form id="formSearch" class="grid">
+        <label class="field">
+          <span>E-Mail (Teilstring möglich)</span>
+          <input id="searchEmail" class="input" type="text" placeholder="xxx.nachname.YY@heilbronn.dhbw.de">
+        </label>
+        <button class="btn" type="submit">Suchen</button>
+      </form>
+      <div id="searchResults" class="table-wrap" aria-live="polite"></div>
+    </section>
+
+    <!-- Alle auflisten -->
+    <section class="card">
+      <h2 class="h2">Alle Benutzer</h2>
+      <div class="row">
+        <div class="row-left">
+          <button id="btnListAll" class="btn">Alle laden</button>
+        </div>
+        <div class="row-right">
+          <label class="field small">
+            <span>Rolle</span>
+            <select id="filterRole" class="input">
+              <option value="">Alle</option>
+              <option value="admin">admin</option>
+              <option value="lecture">lecture</option>
+              <option value="user">user</option>
+            </select>
+          </label>
+        </div>
+      </div>
+      <div id="listResults" class="table-wrap" aria-live="polite"></div>
+    </section>
+
+    <!-- Alle ausloggen -->
+    <section class="card">
+      <h2 class="h2">Benutzer ausloggen</h2>
+      <div class="row">
+        <button id="btnLogoutAll" class="btn-ghost">Alle ausloggen</button>
+        <div class="spacer"></div>
+        <label class="field small">
+          <span>Nur Rolle</span>
+          <select id="logoutRole" class="input">
+            <option value="">alle</option>
+            <option value="admin">admin</option>
+            <option value="lecture">lecture</option>
+            <option value="user">user</option>
+          </select>
+        </label>
+        <button id="btnLogoutByRole" class="btn">Ausloggen (Rolle)</button>
+      </div>
+      <output id="outLogout" class="muted"></output>
+    </section>
+
+    <section class="card">
+  <h2>Stammdaten aktualisieren</h2>
+  <form id="formUpdate" class="grid">
+    <!-- Ziel-Benutzer identifizieren -->
+    <label class="field">
+      <span>E-Mail (aktueller Benutzer)</span>
+      <input id="updEmail" class="input" type="email" placeholder="Benutzer über E-Mail finden" required>
+    </label>
+
+    <!-- Neue E-Mail setzen (optional) -->
+    <label class="field">
+      <span>Neue E-Mail</span>
+      <input id="updEmailNew" class="input" type="email" placeholder="Neue E-Mail (optional)">
+    </label>
+
+    <!-- Neue Rolle setzen (optional) -->
+    <label class="field">
+      <span>Neue Rolle</span>
+      <select id="updNewRole" class="input">
+        <option value="">keine Änderung</option>
+        <option value="admin">admin</option>
+        <option value="user">user</option>
+      </select>
+    </label>
+
+    <!-- Neues Passwort setzen (optional) -->
+    <label class="field">
+      <span>Neues Passwort</span>
+      <input id="updPassword" class="input" type="password" placeholder="Optional neues Passwort">
+    </label>
+
+    <button class="btn" type="submit">Updaten</button>
+    <output id="outUpdate" class="muted"></output>
+  </form>
+</section>
+  </main>
+
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/admin.js"></script>
+  <script src="../assets/js/auth-guard.js"></script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+/* auth.css
+   - Ergänzt und überschreibt selektiv Styles für die Login-Seite
+   - Erwartet, dass index.css bereits vor dieser Datei geladen ist
+*/
+
+/* ---------- Scope & Variablen nur für die Auth-Seite ---------- */
+.auth-page {
+    /* Du kannst diese Variablen jederzeit hier anpassen */
+    --auth-card-maxw: 480px;
+    --auth-card-pad: 22px;
+    --auth-card-radius: 16px;
+    --auth-card-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    --auth-border: 1px solid rgba(0,0,0,0.08);
+    --auth-field-gap: 12px;
+    --auth-actions-gap: 10px;
+    --auth-focus-ring: 0 0 0 3px rgba(59,130,246,0.35); /* fallback blau */
+    --auth-accent: var(--accent, #000000);
+    --auth-muted: var(--muted, #6b7280);
+    --auth-danger: #b91c1c;
+    --auth-bg-blur: blur(8px);
+  }
+  
+  /* Dark-Mode Feintuning */
+  [data-theme="dark"] .auth-page {
+    --auth-border: 1px solid rgba(255,255,255,0.08);
+    --auth-card-shadow: 0 10px 35px rgba(0,0,0,0.45);
+    --auth-focus-ring: 0 0 0 3px rgba(96,165,250,0.45);
+  }
+  
+  /* ---------- Layout: Login-Karte ---------- */
+  .auth-page .auth-card,
+  .auth-page .card {
+    max-width: var(--auth-card-maxw);
+    width: 100%;
+    margin-inline: auto;
+    padding: var(--auth-card-pad);
+    border-radius: var(--auth-card-radius);
+    box-shadow: var(--auth-card-shadow);
+    border: var(--auth-border);
+    backdrop-filter: var(--auth-bg-blur);
+  }
+  
+  /* Optional: Centering, falls deine index.css hier nichts vorgibt */
+  .auth-page main.center {
+    display: grid;
+    place-items: center;
+    min-height: calc(100dvh - 120px); /* Platz unter Topbar */
+    padding: 16px;
+  }
+  
+  /* ---------- Formular ---------- */
+  .auth-page .auth-form {
+    display: grid;
+    gap: var(--auth-field-gap);
+  }
+  
+  .auth-page .auth-form .field {
+    display: grid;
+    gap: 6px;
+  }
+  
+  .auth-page .auth-form label {
+    font-size: 0.95rem;
+    color: var(--auth-muted);
+  }
+  
+  .auth-page .auth-form .input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border, rgba(0,0,0,0.12));
+    background: var(--surface, #fff);
+    outline: none;
+    transition: box-shadow .15s ease, border-color .15s ease, background-color .15s ease;
+  }
+  
+  [data-theme="dark"] .auth-page .auth-form .input {
+    background: var(--surface, rgba(255,255,255,0.04));
+    border-color: rgba(255,255,255,0.12);
+  }
+  
+  .auth-page .auth-form .input:focus {
+    border-color: var(--auth-accent);
+    box-shadow: var(--auth-focus-ring);
+  }
+  
+  /* Checkbox-Zeile */
+  .auth-page .auth-form .inline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  /* Aktionen */
+  .auth-page .actions {
+    display: flex;
+    gap: var(--auth-actions-gap);
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .auth-page .btn {
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: none;
+    background: var(--auth-accent);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform .05s ease, filter .15s ease;
+  }
+  
+  .auth-page .btn:hover { filter: brightness(1.05); }
+  .auth-page .btn:active { transform: translateY(1px); }
+  
+  .auth-page .btn-ghost {
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: transparent;
+    border: 1px solid var(--auth-border-color, rgba(0,0,0,0.12));
+    color: inherit;
+    cursor: pointer;
+  }
+  
+  [data-theme="dark"] .auth-page .btn-ghost {
+    border-color: rgba(255,255,255,0.14);
+  }
+  
+  /* Hinweise & Fehler */
+  .auth-page #hint.muted { color: var(--auth-muted); }
+  .auth-page #error { color: var(--auth-danger) !important; }
+  
+  /* Topbar Feinheiten nur auf Auth-Seite */
+  .auth-page .topbar {
+    backdrop-filter: saturate(120%) blur(4px);
+  }
+  
+  /* Logo optional kleiner auf der Auth-Seite */
+  .auth-page .logo-wrap .logo { max-height: 64px; }
+  
+  /* ---------- Responsiv ---------- */
+  @media (max-width: 420px) {
+    .auth-page {
+      --auth-card-pad: 18px;
+      --auth-card-radius: 14px;
+    }
+    .auth-page .logo-wrap .logo { max-height: 56px; }
+  }
+  
+  /* ---------- Passwortfeld mit Augen-Icon ---------- */
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .password-wrapper .input {
+    padding-right: 40px; /* Platz fürs Auge */
+  }
+  
+  .toggle-pass {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: var(--auth-muted);
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+  }
+  
+  .toggle-pass:hover {
+    opacity: 1;
+  }
+  
+  [data-theme="dark"] .toggle-pass {
+    color: #ccc;
+  }
+  

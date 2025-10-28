@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  <title>LLM Details</title>
+  <link rel="stylesheet" href="../assets/css/details.css" />
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔍</text></svg>">
+</head>
+<body>
+  <header class="topbar">
+    <a href="index.html" class="link">&larr; Zurück</a>
+    <h1 class="brand">Details zu LLMs</h1>
+    <button id="themeToggle" class="icon-btn" aria-label="Theme umschalten" title="Theme umschalten">🌗</button>
+  </header>
+
+  <main class="content" id="cards">
+    <!-- Kachel: Llama 3 -->
+    <article class="card">
+      <button class="card-head" aria-expanded="false" aria-controls="llama3-panel" id="llama3-trigger">
+        <div class="card-title">
+          <span class="card-icon">🦙</span>
+          <h2>Llama 3</h2>
+        </div>
+        <span class="chev" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </button>
+      <div class="card-summary">
+        OpenAI-kompatible API. Stärken: allgemeine Konversation, Wissensfragen.
+      </div>
+      <div class="card-panel" id="llama3-panel" role="region" aria-labelledby="llama3-trigger">
+        <div class="panel-inner">
+          <p><strong>Warum Llama 3?</strong> Gute Balance aus Qualität, Kosten und Offenheit. 
+          Vielfältige Modelgrößen, starke Community, breite Tooling-Unterstützung. 
+          Ideal für Chat, Q&A, Extraktion und schnelle Prototypen.</p>
+          <ul>
+            <li>✓ Günstige Inferenz auf eigener Infrastruktur</li>
+            <li>✓ Viele Feeds/Weights, fine-tuning friendly</li>
+            <li>✓ Solides allgemeines Verständnis & Kontextverarbeitung</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- Kachel: Mistral -->
+    <article class="card">
+      <button class="card-head" aria-expanded="false" aria-controls="mistral-panel" id="mistral-trigger">
+        <div class="card-title">
+          <span class="card-icon">🌬️</span>
+          <h2>Mistral</h2>
+        </div>
+        <span class="chev" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </button>
+      <div class="card-summary">
+        Kompakte Modelle mit guter Qualität und Geschwindigkeit.
+      </div>
+      <div class="card-panel" id="mistral-panel" role="region" aria-labelledby="mistral-trigger">
+        <div class="panel-inner">
+          <p><strong>Warum Mistral?</strong> Effiziente, schnelle Modelle mit starkem 
+          Kosten-/Leistungsverhältnis. Gut für produktive APIs und schlanke Deployments.</p>
+          <ul>
+            <li>✓ Sehr performante kleinere Modelle</li>
+            <li>✓ Starke Code- und Zusammenfassungsfähigkeiten</li>
+            <li>✓ Stabil in Produktion, gute Latenzen</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- Kachel: GPT-J -->
+    <article class="card">
+      <button class="card-head" aria-expanded="false" aria-controls="gptj-panel" id="gptj-trigger">
+        <div class="card-title">
+          <span class="card-icon">🧠</span>
+          <h2>GPT-J</h2>
+        </div>
+        <span class="chev" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </button>
+      <div class="card-summary">
+        Eigen gehostet, einfache JSON-Schnittstelle; gut für kostengünstige Setups.
+      </div>
+      <div class="card-panel" id="gptj-panel" role="region" aria-labelledby="gptj-trigger">
+        <div class="panel-inner">
+          <p><strong>Warum GPT-J?</strong> Bewährtes Open-Source-Modell für interne Tools 
+          und günstige Inferenz. Einfacher Stack, leicht zu betreiben.</p>
+          <ul>
+            <li>✓ Kosteneffizient auf eigener Hardware</li>
+            <li>✓ Gut für strukturierte Prompts/Extraktion</li>
+            <li>✓ Transparent & modifizierbar</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/details.js"></script>
+  <script src="../assets/js/auth-guard.js"></script>
+</body>
+</html>

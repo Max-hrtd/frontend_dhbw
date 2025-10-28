@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  <title>Login</title>
+  <link rel="stylesheet" href="../assets/css/index.css" />
+  <link rel="stylesheet" href="../assets/css/auth.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔐</text></svg>">
+</head>
+<body class="auth-page">
+  <header class="topbar">
+    <h1 class="brand">Anmeldung</h1>
+    <nav class="iconbar" aria-label="Aktionen">
+      <button id="themeToggle" class="icon-btn" aria-label="Theme umschalten" aria-pressed="false" title="Theme umschalten">
+        <span class="icon-emoji">🌗</span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Logo-Bereich -->
+  <div class="logo-wrap">
+    <img src="../assets/img/dhbw_logo.svg" alt="DHBW Logo" class="logo">
+  </div>
+
+  <main class="center">
+    <section class="card auth-card" aria-labelledby="h2">
+      <h2 id="h2" class="h2">Bitte melden Sie sich mit Ihrer DHBW-Mail an:</h2>
+
+      <form id="authForm" class="auth-form" autocomplete="off" novalidate>
+        <div class="field">
+          <label for="email">E-Mail:</label>
+          <input id="email" class="input" type="email" placeholder="xxx.nachname.YY@heilbronn.dhbw.de" required />
+        </div>
+
+        <div class="field password-field">
+          <label for="password">Passwor:</label>
+          <div class="password-wrapper">
+            <input id="password" class="input" type="password" placeholder="********" required />
+            <button type="button" id="togglePassword" class="toggle-pass" aria-label="Passwort anzeigen">
+              👁️
+            </button>
+          </div>
+        </div>
+
+        <div class="field inline">
+          <label for="remember" class="cb">
+            <input id="remember" type="checkbox" /> angemeldet bleiben (24 h)
+          </label>
+        </div>
+
+        <div class="actions" style="display:flex;justify-content:flex-start;">
+          <button class="btn" type="submit">Einloggen</button>
+        </div>
+
+        <p id="error" class="muted" style="color:#b91c1c; display:none; margin-top:8px;">
+          E-Mail oder Passwort ist ungültig.
+        </p>
+      </form>
+    </section>
+  </main>
+
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/auth.js"></script>
+</body>
+</html>

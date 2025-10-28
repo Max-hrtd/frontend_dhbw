@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  <title>DHBW LLM Chat</title>
+  <link rel="stylesheet" href="../assets/css/chat.css" />
+  <!-- Favicon (Emoji als SVG-Data-URL) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💬</text></svg>">
+</head>
+<body>
+  <header class="topbar">
+    <nav class="left">
+      <a href="index.html" class="link" title="Zurück zur Auswahl">&larr; Zurück</a>
+      <span id="modelBadge" class="badge">Modell</span>
+    </nav>
+    <button id="themeToggle" class="btn-ghost" aria-label="Theme umschalten" aria-pressed="false" title="Theme umschalten">🌗</button>
+  </header>
+
+  <main class="chat">
+    <div id="messages" class="messages" aria-live="polite"></div>
+
+    <!-- Composer -->
+    <form id="chatForm" class="composer" autocomplete="off">
+        <div class="input-wrap">
+          <!-- eigener Wrapper NUR fürs Textfeld + Büroklammer -->
+          <div class="input-field">
+            <textarea id="userInput" class="input" name="prompt" placeholder="Nachricht eingeben …" rows="1" ></textarea>
+      
+            <!-- Büroklammer im Feld; for ↔ id verbindet Label + Input -->
+            <label class="upload-icon" for="fileInput">📎</label>
+            <input type="file" id="fileInput" hidden>
+          </div>
+          
+          <div class="hints">Enter senden • Shift+Enter Zeilenumbruch • Esc leeren</div>
+        </div>
+      
+        <button class="send send-circle" type="submit" title="Senden" aria-label="Senden">
+          <svg class="send-ic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h10M13 8l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </form>
+      
+
+    <!-- Scroll to bottom -->
+    <button id="scrollBtn" class="scroll-btn" title="Zum neuesten Beitrag">▼</button>
+  </main>
+
+ <!-- BOT-Nachricht -->
+<template id="tpl-msg-bot">
+    <div class="msg bot">
+      <div class="stack">
+        <div class="bubble-wrap">
+          <div class="avatar avatar--bot" aria-hidden="true">
+            <span class="avatar__icon">🤖</span>
+          </div>
+          <div class="bubble"></div>
+        </div>
+        <div class="meta"></div>
+        <div class="msg-tools right">
+          <button class="tool tool-copy" title="Antwort kopieren" aria-label="Antwort kopieren">
+            <svg class="icon-copy" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="9" y="9" width="11" height="11" rx="2" ry="2"
+                    stroke="currentColor" fill="none" stroke-width="1.8"/>
+              <rect x="5" y="5" width="11" height="11" rx="2" ry="2"
+                    stroke="currentColor" fill="none" stroke-width="1.8"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </template>
+  
+  <!-- USER-Nachricht -->
+  <template id="tpl-msg-user">
+    <div class="msg user">
+      <div class="stack">
+        <div class="bubble-wrap">
+          <div class="bubble"></div>
+          <div class="avatar avatar--user" aria-hidden="true">
+            <span class="avatar__icon">🤡</span>
+          </div>
+        </div>
+        <div class="meta"></div>
+        <div class="msg-tools left">
+          <button class="tool tool-copy" title="Nachricht kopieren" aria-label="Nachricht kopieren">
+            <svg class="icon-copy" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="9" y="9" width="11" height="11" rx="2" ry="2"
+                    stroke="currentColor" fill="none" stroke-width="1.8"/>
+              <rect x="5" y="5" width="11" height="11" rx="2" ry="2"
+                    stroke="currentColor" fill="none" stroke-width="1.8"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </template>
+  
+ 
+  
+
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/chat.js"></script>
+  <script src="../assets/js/auth-guard.js"></script>
+</body>
+</html>
